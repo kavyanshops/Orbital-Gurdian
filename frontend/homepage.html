@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Real-time space debris tracking and collision prevention system for satellites">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    <title>Orbital Guardian | Space Hackathon 2026</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="homepage.css?v=restore_classic_v2">
+    <link rel="stylesheet" href="optimization.css?v=restore_classic_v2">
+    <link rel="stylesheet" href="styles.css?v=restore_classic_v2"> <!-- Ensuring global styles are present -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+</head>
+
+<body>
+    <!-- ============================================
+         HERO SECTION
+         ============================================ -->
+    <section class="hero-section" id="hero">
+        <!-- Animated Background -->
+        <div class="hero-background">
+            <div class="stars-layer layer-1"></div>
+            <div class="stars-layer layer-2"></div>
+            <div class="stars-layer layer-3"></div>
+
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+
+            <div class="grid-overlay"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <!-- Animated Logo -->
+            <div class="hero-logo">
+                <div class="logo-icon-svg">
+                    <svg class="satellite-svg" viewBox="0 0 100 100">
+                        <defs>
+                            <linearGradient id="guardian-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#4facfe" />
+                                <stop offset="100%" stop-color="#00f2fe" />
+                            </linearGradient>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        <!-- Shield/Guardian Orbit -->
+                        <path d="M50 10 A40 40 0 0 1 50 90 A40 40 0 0 1 50 10" fill="none"
+                            stroke="url(#guardian-gradient)" stroke-width="2" stroke-dasharray="10, 5"
+                            class="orbit-ring" />
+
+                        <!-- Central Core -->
+                        <circle cx="50" cy="50" r="15" fill="url(#guardian-gradient)" filter="url(#glow)" />
+
+                        <!-- Satellite Elements -->
+                        <rect x="25" y="47" width="10" height="6" fill="#fff" opacity="0.8" />
+                        <rect x="65" y="47" width="10" height="6" fill="#fff" opacity="0.8" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Title -->
+            <h1 class="hero-title">
+                <span class="title-line">Orbital</span>
+                <span class="title-line">Guardian</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="hero-subtitle">
+                Real-time space debris tracking and collision prevention
+                <span class="highlight-text">Protecting satellites • Securing orbits • Saving missions</span>
+            </p>
+
+            <!-- Stats -->
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="10000">0</span>
+                    <div class="stat-label">Debris Tracked</div>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <div class="stat-item">
+                    <span class="stat-number" data-target="99.9" data-decimal="true">0</span>
+                    <div class="stat-label">Accuracy %</div>
+                </div>
+
+                <div class="stat-divider"></div>
+
+                <div class="stat-item">
+                    <span class="stat-number" data-target="24">0</span>
+                    <div class="stat-label">Real-Time (hrs)</div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hero-cta">
+                <button class="cta-button primary" onclick="scrollToSection('technical')">
+                    <span>Start Analysis</span>
+                    <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
+
+                <button class="cta-button secondary" onclick="scrollToSection('features')">
+                    <span>Explore Features</span>
+                </button>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-text">Scroll to explore</div>
+                <div class="scroll-arrow">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <path d="M12 4v16m0 0l-6-6m6 6l6-6" stroke="currentColor" stroke-width="2" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Debris -->
+        <div class="floating-elements">
+            <div class="floating-debris debris-1"></div>
+            <div class="floating-debris debris-2"></div>
+            <div class="floating-debris debris-3"></div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FEATURES SECTION
+         ============================================ -->
+    <section class="features-section" id="features">
+        <div class="features-container">
+            <!-- Section Header -->
+            <div class="section-header scroll-reveal">
+                <h2 class="section-title">Advanced Capabilities</h2>
+                <p class="section-subtitle">
+                    Three powerful modules working together to keep satellites safe
+                </p>
+            </div>
+
+            <!-- Feature Cards -->
+            <div class="features-grid">
+                <!-- Feature 1: Conjunction Screening -->
+                <div class="feature-card scroll-reveal" onclick="activateTab('conjunction')">
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon">📡</div>
+                        <div class="feature-number">01</div>
+                    </div>
+
+                    <h3 class="feature-title">Conjunction Screening</h3>
+                    <p class="feature-description">
+                        Real-time analysis of satellite trajectories to identify potential
+                        collision threats before they become critical.
+                    </p>
+
+                    <ul class="feature-list">
+                        <li>24/7 automated monitoring</li>
+                        <li>Sub-kilometer precision</li>
+                        <li>Multi-debris tracking</li>
+                    </ul>
+
+                    <div class="feature-badge">Real-Time</div>
+                </div>
+
+                <!-- Feature 2: Optical Detection -->
+                <div class="feature-card scroll-reveal highlighted" onclick="window.location.href='/optical'">
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon">🔬</div>
+                        <div class="feature-number">02</div>
+                    </div>
+
+                    <h3 class="feature-title">Optical Detection</h3>
+                    <p class="feature-description">
+                        AI-powered image analysis to detect and classify space debris
+                        using advanced computer vision algorithms.
+                    </p>
+
+                    <ul class="feature-list">
+                        <li>AI object recognition</li>
+                        <li>Visual threat assessment</li>
+                        <li>Pattern detection</li>
+                    </ul>
+
+                    <div class="feature-badge primary">AI-Powered</div>
+                </div>
+
+                <!-- Feature 3: Maneuver Optimization -->
+                <div class="feature-card scroll-reveal" onclick="activateTab('maneuver')">
+                    <div class="feature-icon-wrapper">
+                        <div class="feature-icon">🚀</div>
+                        <div class="feature-number">03</div>
+                    </div>
+
+                    <h3 class="feature-title">Maneuver Optimization</h3>
+                    <p class="feature-description">
+                        Calculate fuel-efficient avoidance maneuvers using advanced
+                        algorithms to ensure mission success.
+                    </p>
+
+                    <ul class="feature-list">
+                        <li>Minimal fuel consumption</li>
+                        <li>Multiple algorithm options</li>
+                        <li>99.9% success rate</li>
+                    </ul>
+
+                    <div class="feature-badge">Optimized</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         TECHNICAL SECTION
+         ============================================ -->
+    <section class="technical-section" id="technical">
+        <div class="technical-container">
+            <!-- Tab Navigation -->
+            <div class="tabs-navigation scroll-reveal">
+                <button class="tab-item active" data-tab="conjunction" onclick="switchTab('conjunction')">
+                    📡 Conjunction Screening
+                </button>
+                <button class="tab-item" data-tab="optical" onclick="switchTab('optical')">
+                    🔬 Optical Detection
+                </button>
+                <button class="tab-item" data-tab="maneuver" onclick="switchTab('maneuver')">
+                    🚀 Maneuver Optimization
+                </button>
+            </div>
+
+            <!-- Conjunction Tab Content -->
+            <div id="tab-conjunction" class="tab-content active">
+                <!-- Input Section -->
+                <div class="input-section-grid scroll-reveal">
+                    <!-- Satellite TLE Card -->
+                    <div class="premium-input-card">
+                        <div class="card-header-bar">
+                            <div class="header-left">
+                                <div class="header-icon satellite">🛰️</div>
+                                <div class="header-text">
+                                    <h3 class="card-title-premium">Satellite TLE</h3>
+                                    <p class="card-subtitle-premium">Primary spacecraft orbital elements</p>
+                                </div>
+                            </div>
+                            <button class="load-button-gradient" onclick="loadSampleSatellite()">
+                                📥 Load ISS
+                            </button>
+                        </div>
+
+                        <div class="tle-input-box">
+                            <textarea id="satellite-tle" class="tle-textarea-premium" placeholder="Paste Two-Line Element (TLE) data here...
+
+Example:
+ISS (ZARYA)
+1 25544U 98067A   24001.50000000  .00016717  00000-0  10270-3 0  9802
+2 25544  51.6400 208.9163 0006703  40.5765 319.5509 15.49560722999999"></textarea>
+                        </div>
+
+                        <div class="tle-quick-info" id="satellite-info" style="display: none;">
+                            <div class="info-item">
+                                <span class="info-label">Altitude</span>
+                                <span class="info-value" id="sat-altitude">~420 km</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Inclination</span>
+                                <span class="info-value" id="sat-inclin">51.64°</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Period</span>
+                                <span class="info-value" id="sat-period">92.8 min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Space Debris TLE Card -->
+                    <div class="premium-input-card danger-accent">
+                        <div class="card-header-bar">
+                            <div class="header-left">
+                                <div class="header-icon danger">💥</div>
+                                <div class="header-text">
+                                    <h3 class="card-title-premium">Space Debris TLEs</h3>
+                                    <p class="card-subtitle-premium">Threat objects to track and avoid</p>
+                                </div>
+                            </div>
+                            <button class="load-button-gradient" onclick="loadSampleDebris()">
+                                ➕ Load Sample
+                            </button>
+                        </div>
+
+                        <div class="tle-input-box">
+                            <textarea id="debris-tles" class="tle-textarea-premium" placeholder="Paste debris TLE data here (multiple objects supported)...
+
+Example:
+FENGYUN 1C DEB
+1 29479U 99025AHK...
+2 29479  98.5000..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analysis Controls -->
+                <div class="analysis-controls-bar scroll-reveal">
+                    <div class="control-group-premium">
+                        <label class="control-label-premium">⏱️ Analysis Duration</label>
+                        <select id="duration" class="premium-select">
+                            <option value="6">6 hours</option>
+                            <option value="12">12 hours</option>
+                            <option value="24" selected>24 hours</option>
+                            <option value="48">48 hours</option>
+                            <option value="72">72 hours</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group-premium">
+                        <label class="control-label-premium">⚡ Time Step</label>
+                        <select id="timestep" class="premium-select">
+                            <option value="10">10 seconds</option>
+                            <option value="30" selected>30 seconds</option>
+                            <option value="60">1 minute</option>
+                            <option value="300">5 minutes</option>
+                        </select>
+                    </div>
+
+                    <div class="checkbox-group-premium">
+                        <input type="checkbox" id="use-prefilter" class="premium-checkbox" checked>
+                        <label for="use-prefilter" class="checkbox-label-premium">
+                            <span class="checkbox-text">Use orbital radius pre-filter (50 km)</span>
+                            <span class="checkbox-hint">Improves performance for large datasets</span>
+                        </label>
+                    </div>
+
+                    <button class="run-analysis-button" onclick="runAnalysis()">
+                        🔍 Run Analysis
+                        <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Results Container -->
+                <div id="analysis-results" class="scroll-reveal">
+                    <div id="results-section" style="display: none;">
+                        <!-- Status Banner -->
+                        <div id="status-banner" class="status-banner">
+                            <div class="status-icon-wrapper">
+                                <span id="status-icon">✓</span>
+                            </div>
+                            <div class="status-content">
+                                <h3 id="status-title">All Clear</h3>
+                                <p id="status-subtitle">No collisions detected</p>
+                            </div>
+                        </div>
+
+                        <!-- Summary Cards -->
+                        <div class="summary-grid">
+                            <div class="summary-card">
+                                <div class="summary-value" id="summary-satellite">-</div>
+                                <div class="summary-label">Satellite</div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-value" id="summary-debris-count">-</div>
+                                <div class="summary-label">Objects Tracked</div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-value" id="summary-warnings">-</div>
+                                <div class="summary-label">Warnings</div>
+                            </div>
+                            <div class="summary-card">
+                                <div class="summary-value" id="summary-closest">-</div>
+                                <div class="summary-label">Closest Approach</div>
+                            </div>
+                        </div>
+
+                        <!-- 3D Orbit Viewer Container -->
+                        <div id="orbit-card" class="card"
+                            style="display: none; height: 500px; margin-bottom: 2rem; position: relative;">
+                            <div id="orbit-viewer" style="width: 100%; height: 100%;"></div>
+                        </div>
+
+                        <!-- Results Table -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Detailed Analysis</h3>
+                                <div id="results-info" class="results-info"></div>
+                            </div>
+                            <div class="table-container">
+                                <table class="results-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Status</th>
+                                            <th>Object ID</th>
+                                            <th>Min Distance</th>
+                                            <th>Time of Approach</th>
+                                            <th>Recommendation</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="results-tbody">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Metadata -->
+                        <div class="card" style="margin-top: 2rem;">
+                            <h4>Analysis Metadata</h4>
+                            <div id="metadata-grid" class="metadata-grid"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Optical Detection Tab Content -->
+            <div id="tab-optical" class="tab-content" style="display: none;">
+                <div class="coming-soon-placeholder scroll-reveal">
+                    <div style="font-size: 4rem; margin-bottom: 1.5rem;">🔬</div>
+                    <h3 style="font-size: 2rem; color: white; margin-bottom: 1rem;">Optical Detection</h3>
+                    <p style="font-size: 1.25rem; color: #6e7079;">
+                        AI-powered image analysis module - Click to access
+                    </p>
+                    <button class="cta-button primary" style="margin-top: 2rem;"
+                        onclick="window.location.href='/optical'">
+                        Open Detection Module
+                    </button>
+                </div>
+            </div>
+
+            <!-- Maneuver Tab Content -->
+            <div id="tab-maneuver" class="tab-content" style="display: none;">
+                <!-- Sub-section 1: Standard Collision Avoidance -->
+                <section class="optimization-subsection">
+                    <h2 class="section-title">🛡️ Standard Collision Avoidance</h2>
+
+                    <!-- Parameters Bar -->
+                    <div class="card param-bar">
+                        <div class="param-group slider-group">
+                            <label for="iter-standard">Iterations: <span id="iter-standard-val">50</span></label>
+                            <input type="range" id="iter-standard" value="50" min="10" max="200" step="10"
+                                oninput="document.getElementById('iter-standard-val').textContent = this.value">
+                        </div>
+                        <div class="param-group slider-group">
+                            <label for="maneuvers-standard">Maneuvers: <span
+                                    id="maneuvers-standard-val">2</span></label>
+                            <input type="range" id="maneuvers-standard" value="2" min="1" max="5" step="1"
+                                oninput="document.getElementById('maneuvers-standard-val').textContent = this.value">
+                        </div>
+                        <button class="btn btn-primary" id="optimize-standard-btn">
+                            <span class="btn-icon">🚀</span>
+                            <span class="btn-text">Run Optimization</span>
+                        </button>
+                    </div>
+
+                    <!-- Agent Selection Grid -->
+                    <div class="agent-grid" id="algo-grid-standard">
+                        <div class="agent-card selected" data-agent="baseline" data-mode="standard">
+                            <div class="agent-icon">📏</div>
+                            <h4>Baseline</h4>
+                            <p>No maneuvers</p>
+                        </div>
+                        <div class="agent-card" data-agent="cross_entropy" data-mode="standard">
+                            <div class="agent-icon">🌊</div>
+                            <h4>Cross-Entropy</h4>
+                            <p>Statistical optimization</p>
+                        </div>
+                        <div class="agent-card" data-agent="evolution_strategies" data-mode="standard">
+                            <div class="agent-icon">🧬</div>
+                            <h4>Evolution Strategy</h4>
+                            <p>Genetic algorithm</p>
+                        </div>
+                        <div class="agent-card" data-agent="mcts" data-mode="standard">
+                            <div class="agent-icon">🌳</div>
+                            <h4>MCTS</h4>
+                            <p>Tree search</p>
+                        </div>
+                        <div class="agent-card" data-agent="grid_search" data-mode="standard">
+                            <div class="agent-icon">▦</div>
+                            <h4>Grid Search</h4>
+                            <p>Exhaustive search</p>
+                        </div>
+                    </div>
+
+                    <!-- Results for Standard -->
+                    <div class="optimization-result" id="result-standard" style="display: none;">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 id="result-title-standard">Optimization Results</h3>
+                                <span class="results-info" id="result-agent-standard">-</span>
+                            </div>
+                            <div class="summary-grid">
+                                <div class="summary-card">
+                                    <div class="summary-value" id="fuel-standard">-</div>
+                                    <div class="summary-label">Fuel Cost (m/s)</div>
+                                </div>
+                                <div class="summary-card">
+                                    <div class="summary-value" id="prob-standard">-</div>
+                                    <div class="summary-label">Collision Probability</div>
+                                </div>
+                            </div>
+                            <h4>Scheduled Maneuvers</h4>
+                            <table class="results-table">
+                                <thead>
+                                    <tr>
+                                        <th>Epoch (MJD)</th>
+                                        <th>ΔV X (m/s)</th>
+                                        <th>ΔV Y (m/s)</th>
+                                        <th>ΔV Z (m/s)</th>
+                                        <th>Total ΔV</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="maneuver-tbody-standard"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Sub-section 2: Kessler Syndrome Mitigation -->
+                <section class="optimization-subsection" style="margin-top: 2rem;">
+                    <h2 class="section-title">♻️ Kessler Syndrome Mitigation</h2>
+
+                    <!-- Parameters Bar -->
+                    <div class="card param-bar">
+                        <div class="param-group slider-group">
+                            <label for="iter-kessler">Iterations: <span id="iter-kessler-val">50</span></label>
+                            <input type="range" id="iter-kessler" value="50" min="10" max="200" step="10"
+                                oninput="document.getElementById('iter-kessler-val').textContent = this.value">
+                        </div>
+                        <div class="param-group slider-group">
+                            <label for="maneuvers-kessler">Maneuvers: <span id="maneuvers-kessler-val">2</span></label>
+                            <input type="range" id="maneuvers-kessler" value="2" min="1" max="5" step="1"
+                                oninput="document.getElementById('maneuvers-kessler-val').textContent = this.value">
+                        </div>
+                        <button class="btn btn-primary" id="optimize-kessler-btn">
+                            <span class="btn-icon">🚀</span>
+                            <span class="btn-text">Run Optimization</span>
+                        </button>
+                    </div>
+
+                    <!-- Agent Selection Grid -->
+                    <div class="agent-grid" id="algo-grid-kessler">
+                        <div class="agent-card selected" data-agent="baseline" data-mode="kessler">
+                            <div class="agent-icon">📏</div>
+                            <h4>Baseline</h4>
+                            <p>No maneuvers</p>
+                        </div>
+                        <div class="agent-card" data-agent="cross_entropy" data-mode="kessler">
+                            <div class="agent-icon">🌊</div>
+                            <h4>Cross-Entropy</h4>
+                            <p>Debris reduction</p>
+                        </div>
+                        <div class="agent-card" data-agent="evolution_strategies" data-mode="kessler">
+                            <div class="agent-icon">🧬</div>
+                            <h4>Evolution Strategy</h4>
+                            <p>Long-term planning</p>
+                        </div>
+                        <div class="agent-card" data-agent="mcts" data-mode="kessler">
+                            <div class="agent-icon">🌳</div>
+                            <h4>MCTS</h4>
+                            <p>Strategic removal</p>
+                        </div>
+                        <div class="agent-card" data-agent="grid_search" data-mode="kessler">
+                            <div class="agent-icon">▦</div>
+                            <h4>Grid Search</h4>
+                            <p>Cluster optimization</p>
+                        </div>
+                    </div>
+
+                    <!-- Results for Kessler -->
+                    <div class="optimization-result" id="result-kessler" style="display: none;">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 id="result-title-kessler">Optimization Results</h3>
+                                <span class="results-info" id="result-agent-kessler">-</span>
+                            </div>
+                            <div class="summary-grid">
+                                <div class="summary-card">
+                                    <div class="summary-value" id="fuel-kessler">-</div>
+                                    <div class="summary-label">Fuel Cost (m/s)</div>
+                                </div>
+                                <div class="summary-card">
+                                    <div class="summary-value" id="prob-kessler">-</div>
+                                    <div class="summary-label">Collision Probability</div>
+                                </div>
+                            </div>
+                            <h4>Scheduled Maneuvers</h4>
+                            <table class="results-table">
+                                <thead>
+                                    <tr>
+                                        <th>Epoch (MJD)</th>
+                                        <th>ΔV X (m/s)</th>
+                                        <th>ΔV Y (m/s)</th>
+                                        <th>ΔV Z (m/s)</th>
+                                        <th>Total ΔV</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="maneuver-tbody-kessler"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="disclaimer-box scroll-reveal">
+                <div class="disclaimer-icon">⚠️</div>
+                <div class="disclaimer-content">
+                    <strong>Educational Demonstration</strong>
+                    <p>This project is for educational purposes only. Operational space systems require certified
+                        software and professional validation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer class="premium-footer">
+        <div class="footer-content">
+            <p>Orbital Guardian • Space Hackathon 2026</p>
+            <p class="footer-credits">
+                Backend Connected • Powered by Python & Flask
+            </p>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+        // ========== COUNTER ANIMATION ==========
+        function animateCounters() {
+            const stats = document.querySelectorAll('.stat-number');
+
+            stats.forEach(stat => {
+                const target = parseFloat(stat.dataset.target);
+                const isDecimal = stat.dataset.decimal === 'true';
+                const duration = 2000;
+                const startTime = Date.now();
+
+                const animate = () => {
+                    const elapsed = Date.now() - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeProgress = 1 - Math.pow(1 - progress, 3);
+
+                    const current = easeProgress * target;
+
+                    if (isDecimal) {
+                        stat.textContent = current.toFixed(1);
+                    } else {
+                        stat.textContent = Math.floor(current).toLocaleString();
+                    }
+
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+
+                animate();
+            });
+        }
+
+        // ========== SCROLL REVEAL ==========
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -100px 0px' });
+
+            document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+        }
+
+        // ========== PARALLAX ==========
+        function initParallax() {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+
+                document.querySelectorAll('.stars-layer').forEach((layer, index) => {
+                    const speed = (index + 1) * 0.3;
+                    layer.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+
+                document.querySelectorAll('.gradient-orb').forEach((orb, index) => {
+                    const speed = (index + 1) * 0.15;
+                    if (orb.classList.contains('orb-3')) {
+                        orb.style.transform = `translate(-50%, -50%) translateY(${scrolled * speed}px)`;
+                    } else {
+                        orb.style.transform = `translateY(${scrolled * speed}px)`;
+                    }
+                });
+            }, { passive: true });
+        }
+
+        // ========== SMOOTH SCROLL ==========
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // ========== TAB SWITCHING ==========
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-item').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                }
+            });
+
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            const activeContent = document.getElementById(`tab-${tabName}`);
+            if (activeContent) {
+                activeContent.style.display = 'block';
+            }
+        }
+
+        function activateTab(tabName) {
+            scrollToSection('technical');
+            setTimeout(() => switchTab(tabName), 500);
+        }
+
+        // ========== SAMPLE DATA ==========
+        function loadSampleSatellite() {
+            const sampleTLE = `ISS (ZARYA)
+1 25544U 98067A   24001.50000000  .00016717  00000-0  10270-3 0  9802
+2 25544  51.6400 208.9163 0006703  40.5765 319.5509 15.49560722999999`;
+
+            document.getElementById('satellite-tle').value = sampleTLE;
+            document.getElementById('satellite-info').style.display = 'flex';
+        }
+
+        function loadSampleDebris() {
+            const sampleDebris = `FENGYUN 1C DEB
+1 29479U 99025AHK 24001.50000000  .00002000  00000-0  10000-3 0  9999
+2 29479  98.5000 108.0000 0010000 200.0000 160.0000 14.30000009999999
+FENGYUN 1C DEB
+1 30023U 99025BQC 24001.50000000  .00001500  00000-0  80000-4 0  9999
+2 30023  99.0000 150.0000 0020000 180.0000 180.0000 14.30000009999999`;
+
+            document.getElementById('debris-tles').value = sampleDebris;
+        }
+
+        // ========== RUN ANALYSIS ==========
+        async function runAnalysis() {
+            const satelliteTle = document.getElementById('satellite-tle').value;
+            const debrisTles = document.getElementById('debris-tles').value;
+            const duration = document.getElementById('duration').value;
+            const timestep = document.getElementById('timestep').value;
+            const usePrefilter = document.getElementById('use-prefilter').checked;
+
+            if (!satelliteTle || !debrisTles) {
+                alert('Please enter satellite and debris TLE data');
+                return;
+            }
+
+            const resultsDiv = document.getElementById('analysis-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = `
+                <div class="premium-input-card" style="text-align: center; padding: 3rem;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🔄</div>
+                    <p style="font-size: 1.25rem; color: white;">Analyzing orbital trajectories...</p>
+                    <p style="color: #6e7079;">This may take a few moments</p>
+                </div>
+            `;
+
+            try {
+                const response = await fetch('/analyze', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        satellite_tle: satelliteTle,
+                        debris_tles: debrisTles,
+                        duration_hours: parseFloat(duration),
+                        time_step_seconds: parseFloat(timestep),
+                        use_prefilter: usePrefilter
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    displayResults(result.data);
+                } else {
+                    resultsDiv.innerHTML = `
+                        <div class="premium-input-card danger-accent" style="text-align: center; padding: 3rem;">
+                            <div style="font-size: 2rem; margin-bottom: 1rem;">❌</div>
+                            <p style="font-size: 1.25rem; color: #ff0844;">Analysis Failed</p>
+                            <p style="color: #6e7079;">${result.error || 'Unknown error'}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultsDiv.innerHTML = `
+                    <div class="premium-input-card danger-accent" style="text-align: center; padding: 3rem;">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">⚠️</div>
+                        <p style="font-size: 1.25rem; color: #ff0844;">Connection Error</p>
+                        <p style="color: #6e7079;">${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function displayResults(data) {
+            const resultsDiv = document.getElementById('analysis-results');
+
+            // Get warnings from results array
+            const warnings = (data.results || []).filter(r => r.status === 'WARNING');
+            const hasWarnings = data.overall_status === 'WARNINGS_PRESENT' || warnings.length > 0;
+
+            // Find closest approach
+            const analyzedResults = (data.results || []).filter(r => r.status !== 'FILTERED');
+            let closestApproach = '-';
+            if (analyzedResults.length > 0 && analyzedResults[0].min_distance_km !== null) {
+                closestApproach = `${analyzedResults[0].min_distance_km.toFixed(3)} km`;
+            }
+
+            // Build results table HTML
+            let resultsTableHtml = '';
+            if (data.results && data.results.length > 0) {
+                resultsTableHtml = data.results.map(result => {
+                    const statusEmoji = result.status === 'WARNING' ? '🚨' : (result.status === 'SAFE' ? '✅' : '⏭️');
+                    const statusColor = result.status === 'WARNING' ? '#ff0844' : (result.status === 'SAFE' ? '#00f2c3' : '#6e7079');
+
+                    let distanceText = '-';
+                    if (result.min_distance_km !== null) {
+                        const isClose = result.min_distance_km < 10;
+                        distanceText = `<span style="color: ${isClose ? '#ff0844' : '#00f2c3'}; font-family: var(--font-mono);">${result.min_distance_km.toFixed(3)} km</span>`;
+                    }
+
+                    let timeText = result.reason || '-';
+                    if (result.closest_approach_time) {
+                        const date = new Date(result.closest_approach_time.replace(/\+00:00Z$/, 'Z'));
+                        timeText = date.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+                    }
+
+                    return `
+                        <div style="display: flex; align-items: center; gap: 1rem; padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+                            <span style="color: ${statusColor}; min-width: 80px;">${statusEmoji} ${result.status}</span>
+                            <span style="flex: 1; color: white;">${result.debris_id}</span>
+                            <span style="min-width: 100px;">${distanceText}</span>
+                            <span style="min-width: 180px; color: #6e7079; font-size: 0.85rem;">${timeText}</span>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            resultsDiv.innerHTML = `
+                <!-- Status Banner -->
+                <div class="premium-input-card" style="margin-bottom: 2rem; ${hasWarnings ? 'border-color: #ff0844;' : 'border-color: #00f2c3;'}">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="font-size: 2.5rem;">${hasWarnings ? '⚠️' : '✅'}</div>
+                        <div>
+                            <h3 style="margin: 0; color: ${hasWarnings ? '#ff0844' : '#00f2c3'};">
+                                ${hasWarnings ? `${warnings.length} Warning${warnings.length > 1 ? 's' : ''} Detected!` : 'All Clear - No Collision Threats'}
+                            </h3>
+                            <p style="margin: 0.5rem 0 0 0; color: #b8b9be;">
+                                ${hasWarnings ? `${warnings.length} debris object(s) within 10 km threshold` : 'No debris objects within alert threshold'}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Stats -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem;">
+                    <div class="premium-input-card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🛰️</div>
+                        <div style="color: #6e7079; font-size: 0.85rem; margin-bottom: 0.25rem;">Satellite</div>
+                        <div style="color: white; font-size: 1.1rem; font-weight: 600;">${data.satellite_name || 'N/A'}</div>
+                    </div>
+                    <div class="premium-input-card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💥</div>
+                        <div style="color: #6e7079; font-size: 0.85rem; margin-bottom: 0.25rem;">Debris Analyzed</div>
+                        <div style="color: white; font-size: 1.5rem; font-weight: 700;">${data.debris_analyzed || 0}</div>
+                    </div>
+                    <div class="premium-input-card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">⚠️</div>
+                        <div style="color: #6e7079; font-size: 0.85rem; margin-bottom: 0.25rem;">Warnings</div>
+                        <div style="color: ${warnings.length > 0 ? '#ff0844' : '#00f2c3'}; font-size: 1.5rem; font-weight: 700;">${data.warnings_count || 0}</div>
+                    </div>
+                    <div class="premium-input-card" style="text-align: center; padding: 1.5rem;">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📏</div>
+                        <div style="color: #6e7079; font-size: 0.85rem; margin-bottom: 0.25rem;">Closest Approach</div>
+                        <div style="color: #667eea; font-size: 1.1rem; font-weight: 600; font-family: var(--font-mono);">${closestApproach}</div>
+                    </div>
+                </div>
+
+                <!-- Results Table -->
+                <div class="premium-input-card" style="margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="margin: 0; color: white;">📋 Detailed Results</h4>
+                        <span style="color: #6e7079; font-size: 0.85rem;">${data.results?.length || 0} objects • Sorted by closest approach</span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); color: #6e7079; font-size: 0.75rem; text-transform: uppercase;">
+                        <span style="min-width: 80px;">Status</span>
+                        <span style="flex: 1;">Debris ID</span>
+                        <span style="min-width: 100px;">Distance</span>
+                        <span style="min-width: 180px;">Closest Approach</span>
+                    </div>
+                    
+                    ${resultsTableHtml || '<div style="padding: 1rem; color: #6e7079; text-align: center;">No debris objects analyzed</div>'}
+                </div>
+
+                <!-- 3D Orbit Visualization -->
+                <div class="premium-input-card" style="margin-bottom: 2rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h4 style="margin: 0; color: white;">🌍 3D Orbit Visualization</h4>
+                        <span style="color: #6e7079; font-size: 0.85rem;">Interactive • Drag to rotate</span>
+                    </div>
+                    <div id="orbit-viewer" style="width: 100%; height: 400px; background: rgba(0,0,0,0.3); border-radius: 12px; overflow: hidden;"></div>
+                    <div style="display: flex; gap: 2rem; margin-top: 1rem; justify-content: center;">
+                        <span style="display: flex; align-items: center; gap: 0.5rem; color: #6e7079; font-size: 0.85rem;">
+                            <span style="width: 12px; height: 12px; background: #00ffff; border-radius: 50%;"></span> Satellite
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem; color: #6e7079; font-size: 0.85rem;">
+                            <span style="width: 12px; height: 12px; background: #ff4444; border-radius: 50%;"></span> Warning Debris
+                        </span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem; color: #6e7079; font-size: 0.85rem;">
+                            <span style="width: 12px; height: 12px; background: #ff8800; border-radius: 50%;"></span> Safe Debris
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Metadata -->
+                <div class="premium-input-card">
+                    <h4 style="margin: 0 0 1rem 0; color: white;">📊 Analysis Metadata</h4>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                        <div class="info-item">
+                            <span class="info-label">Analysis Window</span>
+                            <span class="info-value">${Math.round((new Date(data.analysis_end?.replace(/\+00:00Z$/, 'Z')) - new Date(data.analysis_start?.replace(/\+00:00Z$/, 'Z'))) / 3600000) || 24}h</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Time Step</span>
+                            <span class="info-value">${data.time_step_seconds || 30}s</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Pre-filtered</span>
+                            <span class="info-value">${data.debris_filtered || 0} objects</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Satellite Catalog #</span>
+                            <span class="info-value">${data.satellite_catalog_number || 'N/A'}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Total Screened</span>
+                            <span class="info-value">${data.total_debris_screened || 0}</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Alert Threshold</span>
+                            <span class="info-value">10 km</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Initialize 3D orbit viewer
+            initOrbitViewer(data);
+        }
+
+        // ========== 3D ORBIT VIEWER ==========
+        let orbitViewer = null;
+
+        async function initOrbitViewer(analysisData) {
+            try {
+                if (!window.OrbitViewer) {
+                    console.warn('OrbitViewer not loaded');
+                    return;
+                }
+
+                if (!orbitViewer) {
+                    orbitViewer = new OrbitViewer('orbit-viewer');
+                    await orbitViewer.init();
+                }
+
+                // Fetch orbit trajectory data
+                const satelliteTle = document.getElementById('satellite-tle').value;
+                const debrisTles = document.getElementById('debris-tles').value;
+
+                const response = await fetch('/orbits', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        satellite_tle: satelliteTle,
+                        debris_tles: debrisTles,
+                        duration_hours: 2
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success && result.data) {
+                    // Mark warning debris
+                    const warningIds = new Set(
+                        (analysisData.results || [])
+                            .filter(r => r.status === 'WARNING')
+                            .map(r => r.debris_id)
+                    );
+
+                    result.data.debris = result.data.debris.map(d => ({
+                        ...d,
+                        isWarning: warningIds.has(d.name)
+                    }));
+
+                    orbitViewer.loadOrbitData(result.data);
+                }
+            } catch (error) {
+                console.warn('3D viewer initialization failed:', error);
+            }
+        }
+
+        // ========== INIT ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            animateCounters();
+            initScrollReveal();
+            initParallax();
+        });
+    </script>
+
+    <style>
+        .coming-soon-placeholder {
+            background: var(--color-glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--color-border-default);
+            border-radius: var(--radius-3xl);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .tab-content {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <!-- 3D Orbit Viewer Script -->
+    <script src="orbit-viewer.js?v=restore_classic_v3"></script>
+    <script src="optimization_v3.js?v=restore_classic_v3"></script>
+</body>
+
+</html>

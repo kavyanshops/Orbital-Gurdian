@@ -1,0 +1,34 @@
+============================================================
+Collision Avoidance Alert System - Backend Server
+============================================================
+Starting Flask server on http://localhost:5000
+
+Endpoints:
+  POST /analyze           - Run conjunction screening
+  POST /orbits            - Get orbit trajectories for 3D viz
+  POST /save-analysis     - Save analysis to MongoDB
+  GET  /analysis-history  - Get past analyses
+  GET  /analysis/<id>     - Get specific analysis
+  GET  /statistics        - Get system statistics
+  GET  /health            - Health check
+  GET  /sample-data       - Get sample TLE data
+
+Debris Detection (Detectron2):
+  POST /detect-debris     - Detect debris in uploaded image
+  POST /detect-debris-batch - Batch detection on multiple images
+  GET  /detection-sample  - Get sample detection demo
+
+RL Maneuver Optimization:
+  GET  /rl-agents         - List available RL agents
+  POST /optimize-maneuver - Run RL optimization
+============================================================
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.7.4.45:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 107-880-814
