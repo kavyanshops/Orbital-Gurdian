@@ -107,6 +107,9 @@ export default function Dashboard() {
                 </button>
             </div>
 
+            {/* Real-Time Tab */}
+            {activeTab === "realtime" && <RealTimeDashboard />}
+
             {/* Conjunction Tab */}
             {activeTab === "conjunction" && (
                 <div className="space-y-6 animate-in fade-in zoom-in-95 duration-300">

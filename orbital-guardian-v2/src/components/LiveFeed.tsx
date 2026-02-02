@@ -58,7 +58,7 @@ export default function LiveFeed() {
                     {/* Title */}
                     <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white">
                         <span className="block text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">Orbital</span>
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Guardian</span>
+                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600">Sentinel</span>
                     </h1>
 
                     {/* Subtitle */}

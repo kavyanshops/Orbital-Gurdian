@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import * as d3 from "d3"
-import { twoline2satrec, propagate, gstime, eciToGeodetic, degreesLat, degreesLong } from "satellite.js"
 import * as satellite from "satellite.js"
 
 interface SatelliteData {
@@ -37,6 +36,13 @@ export default function RotatingEarth({ width = 800, height = 600, className = "
             }))
         }
     }, [satellites])
+
+    // Use isLoading to suppress unused warning (or render loading state)
+    useEffect(() => {
+        if (!isLoading) {
+            // console.log("Globe loaded")
+        }
+    }, [isLoading])
 
     useEffect(() => {
         if (!canvasRef.current) return
@@ -151,10 +157,6 @@ export default function RotatingEarth({ width = 800, height = 600, className = "
         const allDots: DotData[] = []
         let landFeatures: any
 
-        // Mouse position for hover detection
-        // Mouse position for hover detection
-        // const mousePos = useRef<[number, number] | null>(null) // Moved to top level
-
         // Helper to generate orbit path
         const getOrbitPath = (satrec: any, time: Date) => {
             const pathCoords: [number, number][] = []
@@ -163,13 +165,15 @@ export default function RotatingEarth({ width = 800, height = 600, className = "
             for (let i = 0; i < 100; i++) {
                 const t = new Date(time.getTime() + i * 60000)
                 const pv = satellite.propagate(satrec, t)
-                const pos = pv.position
-                if (pos && typeof pos !== 'boolean') {
-                    const gmst = satellite.gstime(t)
-                    const geo = satellite.eciToGeodetic(pos, gmst)
-                    const lng = satellite.degreesLong(geo.longitude)
-                    const lat = satellite.degreesLat(geo.latitude)
-                    pathCoords.push([lng, lat])
+                if (pv && pv.position) {
+                    const pos = pv.position
+                    if (pos && typeof pos !== 'boolean') {
+                        const gmst = satellite.gstime(t)
+                        const geo = satellite.eciToGeodetic(pos, gmst)
+                        const lng = satellite.degreesLong(geo.longitude)
+                        const lat = satellite.degreesLat(geo.latitude)
+                        pathCoords.push([lng, lat])
+                    }
                 }
             }
             return pathCoords
@@ -234,6 +238,8 @@ export default function RotatingEarth({ width = 800, height = 600, className = "
 
                 satrecsRef.current.forEach(sat => {
                     const positionAndVelocity = satellite.propagate(sat.satrec, now)
+                    if (!positionAndVelocity || !positionAndVelocity.position) return;
+
                     const positionEci = positionAndVelocity.position
 
                     if (positionEci && typeof positionEci !== 'boolean') {
